@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>生徒用フォーム</title>
+    </head>
+    <script src="form.js"></script>
+    <body>
+        <h1>生徒用フォーム</h1>
+        <form action="postStudent" method="post">
+            <p>都合のよい時間</p>
+            <table class="timetable">
+                <!--カラムラベル-->
+                <tr>
+                    <th></th>
+                    <th>1日目</th>
+                    <th>2日目</th>
+                    <th>3日目</th>
+                    <th>4日目</th>
+                    <th>5日目</th>
+                    <th>6日目</th>
+                    <th>7日目</th>
+                </tr>
+                <tr class="time_1">
+                    <th>1限目</th>
+                    <td><input name="day1time1" type="checkbox"></td>
+                    <td><input name="day2time1" type="checkbox"></td>
+                    <td><input name="day3time1" type="checkbox"></td>
+                    <td><input name="day4time1" type="checkbox"></td>
+                    <td><input name="day5time1" type="checkbox"></td>
+                    <td><input name="day6time1" type="checkbox"></td>
+                    <td><input name="day7time1" type="checkbox"></td>
+                </tr>
+                <tr class="time_2">
+                    <th>2限目</th>
+                    <td><input name="day1time2" type="checkbox"></td>
+                    <td><input name="day2time2" type="checkbox"></td>
+                    <td><input name="day3time2" type="checkbox"></td>
+                    <td><input name="day4time2" type="checkbox"></td>
+                    <td><input name="day5time2" type="checkbox"></td>
+                    <td><input name="day6time2" type="checkbox"></td>
+                    <td><input name="day7time2" type="checkbox"></td>
+                </tr>
+                <tr class="time_3">
+                    <th>3限目</th>
+                    <td><input name="day1time3" type="checkbox"></td>
+                    <td><input name="day2time3" type="checkbox"></td>
+                    <td><input name="day3time3" type="checkbox"></td>
+                    <td><input name="day4time3" type="checkbox"></td>
+                    <td><input name="day5time3" type="checkbox"></td>
+                    <td><input name="day6time3" type="checkbox"></td>
+                    <td><input name="day7time3" type="checkbox"></td>
+                </tr>
+            </table>
+            <p>担当科目</p>
+            <textarea name="subject" rows="7" cols="40"></textarea><br>
+            <p>担当可能学年</p>
+            <textarea name="likeTeacher" rows="7" cols="40"></textarea>
+            <button type="submit">送信</button>
+        </form>
+    </body>
+</html>
