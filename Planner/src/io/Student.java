@@ -1,4 +1,4 @@
-package io;
+package hack;
 
 import java.util.List;
 import java.util.Map;
@@ -7,11 +7,15 @@ public class Student {
 	private String name;
 	private List<String> subjects;
 	private Map<String, List<String>> timetable;
+	private int attend;
+	private List<String> like;
 	
-	Student(String name, List<String> subjects, Map<String, List<String>> timetable){
+	Student(String name, List<String> subjects, Map<String, List<String>> timetable, int attend, List<String> like){
 		this.name = name;
 		this.subjects = subjects;
 		this.timetable = timetable;
+		this.attend = attend;
+		this.like = like;
 	}
 	
 	public void setName(String name) {
@@ -26,6 +30,14 @@ public class Student {
 		this.timetable = timetable;
 	}
 	
+	public void setAttend(int attend) {
+		this.attend = attend;
+	}
+	
+	public void setLike(List<String> like) {
+		this.like = like;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
@@ -37,5 +49,14 @@ public class Student {
 	public Map<String, List<String>> getTimetable() {
 		return this.timetable;
 	}
+	
+	public int getAttend() {
+		return this.attend;
+	}
+	
+	public List<String> getLike() {
+		return this.like;
+	}
 
 }
+
