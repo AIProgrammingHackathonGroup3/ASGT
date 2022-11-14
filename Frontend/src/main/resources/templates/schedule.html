@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>シフト表</title>
+    </head>
+    <body>
+        <th:block th:each="op : ${ops}">
+            [[$op.toString()]]<br>
+        </th:block>
+        <br>
+        [[${ops.toString()}]]
+    </body>
+</html>

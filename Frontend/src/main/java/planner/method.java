@@ -44,6 +44,10 @@ public class method {
 		return dayday;
 	}
 
+	public static String getAttend(String name, int attend){
+		return name + " attend "+attend+" times";
+	}
+
 	public static List<Predicate> getGoal(List<String> name) {
         List<Predicate> goal = new ArrayList<Predicate>();
         for(int i = 0;i<name.size(); i++) {
@@ -52,16 +56,12 @@ public class method {
         return goal;
     }
 
-	public static List<String> getTakeSubject(String name) {
-		List<String> subject = new ArrayList<String>();
-		subject.add(name + " take " + subject);
-		return subject;
+	public static String getTakeSubject(String name, String subject) {
+		return name + " take " + subject;
 	}
 
-	public static List<String> getTeachSubject(String name) {
-		List<String> subject = new ArrayList<String>();
-		subject.add(name + " can " + subject);
-		return subject;
+	public static String getTeachSubject(String name, String subject) {
+		return name + " can " + subject;
 	}
 
 	public static void main(String[] args) {

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 public class HackController {
     List<Predicate> sampleInitialState = new ArrayList<>();
     List<Predicate> sampleGoalState = new ArrayList<>();
+    List<String> studentsName = new ArrayList<>();
 
     @RequestMapping(value = "/index")
     private String indexPage() {
@@ -43,7 +44,7 @@ public class HackController {
             boolean day5time1, boolean day5time2, boolean day5time3,
             boolean day6time1, boolean day6time2, boolean day6time3,
             boolean day7time1, boolean day7time2, boolean day7time3,
-            String subject, int grade, String likeTeacher, String dislikeTeacher,
+            String subject, int grade, String likeTeacher,
             Model model) {
         ArrayList<Boolean> timetable = new ArrayList<>();
         timetable.add(day1time1);
@@ -71,7 +72,7 @@ public class HackController {
         ArrayList<String> goalString = new ArrayList<>();
 
         goalString.addAll(method.getStudentDay(name, timetable));
-        goalString.addAll(method.getTakeSubject(subject));
+        goalString.add(method.getTakeSubject(name, subject));
 
         sampleInitialState.addAll(Utils.list(goalString));
 
@@ -115,8 +116,8 @@ public class HackController {
 
         ArrayList<String> initString = new ArrayList<>();
 
-        initString.addAll(method.getStudentDay(name, timetable));
-        initString.addAll(method.getTeachSubject(subject));
+        initString.addAll(method.getTeacherDay(name, timetable));
+        initString.add(method.getTeachSubject(name, subject));
 
         sampleInitialState.addAll(Utils.list(initString));
 
@@ -127,7 +128,9 @@ public class HackController {
     private String schedulePage(Model model) {
 
         Problem p = new Schedule(sampleInitialState, sampleGoalState);
-        new ForwardPlanner().solve(p);
+        List<Operator> op = new ForwardPlanner().solve(p);
+
+        model.addAttribute("ops", op);
 
         return "/schedule.html";
     }
