@@ -1,0 +1,13 @@
+<html>
+	<body>
+		<form action="/postForm" method="post">
+      		<div  class="text-end">
+				<input type="submit" class="btn btn-primary" value="　更新　">
+			</div><br />
+			<th:block th:each="i : ${#numbers.sequence(0,2)}">
+				<input name="text[[${i.toString()}]]" type="text" ></input>
+			</th:block>
+
+		</form>
+	</body>
+</html>

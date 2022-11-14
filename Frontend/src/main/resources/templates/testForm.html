@@ -1,0 +1,11 @@
+<html>
+	<body>
+		<form th:action="@{/postForm}" th:object="${form}" method="post">
+      		<div  class="text-end">
+				<input type="submit" class="btn btn-primary" value="　更新　">
+			</div><br />
+			<input type="text" th:field="*{aaa}"></input>
+			<input type="text" th:field="*{bbb}"></input>
+		</form>
+	</body>
+</html>
