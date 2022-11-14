@@ -44,7 +44,7 @@ public class HackController {
             boolean day5time1, boolean day5time2, boolean day5time3,
             boolean day6time1, boolean day6time2, boolean day6time3,
             boolean day7time1, boolean day7time2, boolean day7time3,
-            String subject, int grade, String likeTeacher,
+            int attend, String subject, int grade, String likeTeacher,
             Model model) {
         ArrayList<Boolean> timetable = new ArrayList<>();
         timetable.add(day1time1);
@@ -68,13 +68,15 @@ public class HackController {
         timetable.add(day7time1);
         timetable.add(day7time2);
         timetable.add(day7time3);
+         System.out.print(timetable);
 
-        ArrayList<String> goalString = new ArrayList<>();
+        ArrayList<String> initString = new ArrayList<>();
 
-        goalString.addAll(method.getStudentDay(name, timetable));
-        goalString.add(method.getTakeSubject(name, subject));
+        initString.addAll(method.getStudentDay(name, timetable));
+        initString.add(method.getAttend(name, attend));
+        initString.add(method.getTakeSubject(name, subject));
 
-        sampleInitialState.addAll(Utils.list(goalString));
+        sampleInitialState.addAll(Utils.list(initString));
 
         return "/submit.html";
     }
@@ -113,6 +115,7 @@ public class HackController {
         timetable.add(day7time1);
         timetable.add(day7time2);
         timetable.add(day7time3);
+        System.out.print(timetable);
 
         ArrayList<String> initString = new ArrayList<>();
 
