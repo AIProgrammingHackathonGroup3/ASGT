@@ -5,21 +5,6 @@ import static planner.Matcher.*;
 
 import java.util.*;
 
-// class Output {
-// 	String teacher;
-// 	String student;
-// 	String subject;
-// 	int date;
-// 	int time;
-
-// 	Output(Operator action) {
-// 		// action.name から Output[]を作成
-// 		// 例）#2: Sanji and Kim in 1 | 1 | subject math
-// 		// インスタンスを初期化
-// 	}
-
-// }
-
 public class ForwardPlanner extends Planner {
 	public List<Operator> solve(Problem problem) {
 		this.operators = problem.operators();
@@ -31,33 +16,28 @@ public class ForwardPlanner extends Planner {
 		System.out.println("goal: " + this.goal);
 
 		Node goal = plan(root);
-		// goalがなければ失敗
+		//goalがなければ失敗
 		if (goal == null) {
 			System.out.println("**** failed ****");
 			return null;
 		}
 
-		// 目標状態までの手順を表示
+		//目標状態までの手順を表示
 		System.out.println("***** This is a plan! *****");
 		var plan = goal.toPlan();
-
-		// List<Output> outputs = new ArrayList<Output>();
-		for (var action : plan) {
-			// outputs.add(new Output(action));
+		for (var action : plan)
 			System.out.println(action.name);
-		}
 		return plan;
 	}
 
 	Node plan(Node root) {
 		final int maxDepthLimit = 10;
 		int depthLimit = 4;
-		// 深さ制限が最大を超えるまで深さ制限を増やしつつ探索を行う
+		//深さ制限が最大を超えるまで深さ制限を増やしつつ探索を行う
 		while (depthLimit < maxDepthLimit) {
 			System.out.println("=================== " + depthLimit);
 			Node goal = search(root, depthLimit);
-			if (goal != null)
-				return goal;
+			if (goal != null) return goal;
 			depthLimit += 1;
 		}
 		return null;
@@ -68,11 +48,10 @@ public class ForwardPlanner extends Planner {
 		openList.add(root);
 
 		while (openList.size() > 0) {
-			Node s = openList.remove(0); // Listの一番目の要素を取り出す
+			Node s = openList.remove(0); //Listの一番目の要素を取り出す
 			System.out.println("------------------");
-			System.out.printf("visit (%d) %s\n", s.id, s.state); // 取り出した要素のidと状態を表示
-			if (isGoal(s))
-				return s; // 取り出した要素がゴールならreturn
+			System.out.printf("visit (%d) %s\n", s.id, s.state); //取り出した要素のidと状態を表示
+			if (isGoal(s)) return s; //取り出した要素がゴールならreturn
 			if (s.depth() < depthLimit) {
 				System.out.println("->");
 				var children = expand(s);
@@ -83,11 +62,10 @@ public class ForwardPlanner extends Planner {
 		return null;
 	}
 
-	// ノードが目標状態であるかどうか
+	//ノードが目標状態であるかどうか
 	boolean isGoal(Node node) {
 		var unifiers = satisfy(this.goal, node.state);
-		if (unifiers == null)
-			return false;
+		if (unifiers == null) return false;
 		for (var b : unifiers) {
 			var g = b.instantiate(this.goal);
 			if (isGround(g))
@@ -96,7 +74,7 @@ public class ForwardPlanner extends Planner {
 		return false;
 	}
 
-	// 子ノードの作成
+	//子ノードの作成
 	List<Node> expand(Node node) {
 		var children = new ArrayList<Node>();
 		for (Operator op : this.operators) {
@@ -110,7 +88,8 @@ public class ForwardPlanner extends Planner {
 	void expand(Node node,
 			Operator operator,
 			List<Bind> unifiers,
-			List<Node> children) {
+			List<Node> children)
+	{
 		for (Bind b : unifiers) {
 			Node child = new Node();
 			b = node.bind.merged(b);

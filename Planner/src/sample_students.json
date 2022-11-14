@@ -3,8 +3,10 @@
     "name": "Taro",
     "subject": ["english"],
     "timetable": {
-      "10/1": [ "1" ],
-      "10/2": ["3" ]
-    }
+      "1": [ "1" ],
+      "2": ["3" ]
+    },
+    "attend": 2,
+    "like": ["Kim"]
   }
 ]

@@ -1,24 +1,27 @@
 package com.example.demo;
 
+import java.util.*;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
 @Controller
 public class HackController {
-
     @RequestMapping(value = "/index")
     private String indexPage() {
         return "/index.html";
     }
 
-    @RequestMapping(value = "/formStudent")
+    @RequestMapping(value = "/formStudent.html")
     private String formStudent(Model model) {
 
         return "/formStudent.html";
     }
 
-    @RequestMapping(value = "/formTeacher")
+    @RequestMapping(value = "/formTeacher.html")
     private String formTeacher(Model model) {
 
         return "/formTeacher.html";
@@ -26,6 +29,7 @@ public class HackController {
 
     @RequestMapping(value = "/postStudent")
     private String postStudent(
+            String name,
             boolean day1time1, boolean day1time2, boolean day1time3,
             boolean day2time1, boolean day2time2, boolean day2time3,
             boolean day3time1, boolean day3time2, boolean day3time3,
@@ -41,6 +45,7 @@ public class HackController {
 
     @RequestMapping(value = "postTeacher")
     private String postTeacher(
+            String name,
             boolean day1time1, boolean day1time2, boolean day1time3,
             boolean day2time1, boolean day2time2, boolean day2time3,
             boolean day3time1, boolean day3time2, boolean day3time3,
@@ -58,5 +63,19 @@ public class HackController {
     private String schedulePage(Model model) {
 
         return "/schedule.html";
+    }
+
+    private ArrayList<String> str2query(String form) {
+        ArrayList<String> query = new ArrayList<>();
+
+        if (form != null) {
+            String[] lines = form.split("\n");
+            for (String line : lines) {
+                line = line.trim();
+                query.add(line);
+            }
+        }
+
+        return query;
     }
 }
