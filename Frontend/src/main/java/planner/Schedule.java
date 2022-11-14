@@ -7,7 +7,7 @@ import java.util.*;
 public class Schedule implements Problem {
 	List<Predicate> initial, goal;
 
-	Schedule(List<Predicate> initial, List<Predicate> goal) {
+	public Schedule(List<Predicate> initial, List<Predicate> goal) {
 		this.initial = initial;
 		this.goal = goal;
 	}
