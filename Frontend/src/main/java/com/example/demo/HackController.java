@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fasterxml.jackson.core.JsonGenerator;
+import planner.Output;
 
 @Controller
 public class HackController {
@@ -61,6 +61,12 @@ public class HackController {
 
     @RequestMapping(value = "/schedule")
     private String schedulePage(Model model) {
+        // List<Output> output = (new PlannerAdapter()).test();
+        List<Output> outputResult = new ArrayList<Output>();
+        outputResult
+                .add(new Output("Sanji", "Kim", "English", 1, 2));
+        // Output output = new Output("Sanji", "Kim", "English", 1, 2);
+        model.addAttribute("outputResult", outputResult);
 
         return "/schedule.html";
     }

@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>シフトの自動作成</title>
+    </head>
+    <body>
+        <h1>結果</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th > spa </th>
+                    <th> Author </th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${outputResult.empty}">
+                    <td colspan="2"> No Books Available </td>
+                </tr>
+                <tr th:each="outputResult : ${output}">
+                    <td><span th:text="${output.teacher}"> teacher </span></td>
+                    <td><span th:text="${output.student}"> student </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
