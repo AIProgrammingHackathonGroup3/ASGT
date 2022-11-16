@@ -7,5 +7,5 @@ public abstract class Planner {
 	List<Predicate> init;
 	List<Predicate> goal;
 
-	public abstract List<Output> solve(Problem problem);
+	public abstract List<Lesson> solve(Problem problem);
 }

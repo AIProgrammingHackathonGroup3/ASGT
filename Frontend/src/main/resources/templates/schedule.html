@@ -1,25 +1,35 @@
 <html>
     <head>
         <title>シフトの自動作成</title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
     <body>
         <h1>結果</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th > spa </th>
-                    <th> Author </th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr th:if="${outputResult.empty}">
-                    <td colspan="2"> No Books Available </td>
-                </tr>
-                <tr th:each="outputResult : ${output}">
-                    <td><span th:text="${output.teacher}"> teacher </span></td>
-                    <td><span th:text="${output.student}"> student </span></td>
-                </tr>
-            </tbody>
-        </table>
+        <div th:each="info : ${lessonInfo}">
+            <span th:text="${info}"></span>
+        </div>
+        <!-- <table class="table">
+            <div th:each="date : ${dateList}">
+                <thead >
+                    <tr>
+                        <th>
+                            <span th:text="${date}"></span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th th:each="name : ${teacherNameList}" scope="col"> 
+                            <span th:text="${name}"></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody th:each="time : ${timeList}">
+                    
+                    <tr th:each="lesson : ${lessonList}">
+                        <td><span th:text="${lesson.student}">  </span></td>
+                    </tr>
+                </tbody>
+            </div>
+        </table> -->
     </body>
 </html>

@@ -6,7 +6,7 @@ import static planner.Matcher.*;
 import java.util.*;
 
 public class ForwardPlanner extends Planner {
-	public List<Output> solve(Problem problem) {
+	public List<Lesson> solve(Problem problem) {
 		this.operators = problem.operators();
 		this.init = problem.initialState();
 		this.goal = problem.goalState();
@@ -25,9 +25,9 @@ public class ForwardPlanner extends Planner {
 		// 目標状態までの手順を表示
 		System.out.println("***** This is a plan! *****");
 		var plan = goal.toPlan();
-		List<Output> outputResult = new ArrayList<Output>();
+		List<Lesson> outputResult = new ArrayList<Lesson>();
 		for (var action : plan) {
-			outputResult.add(new Output(action));
+			outputResult.add(new Lesson(action));
 		}
 		return outputResult;
 	}

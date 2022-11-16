@@ -5,7 +5,7 @@ import static planner.Utils.*;
 
 public class PlannerAdapter {
 
-    public List<Output> test() {
+    public List<Lesson> test() {
         List<Predicate> sampleInitialState = list(
                 "Sanji can math",
                 "Sanji can english",

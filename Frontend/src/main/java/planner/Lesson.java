@@ -1,13 +1,13 @@
 package planner;
 
-public class Output {
+public class Lesson {
     public String teacher;
     public String student;
     public String subject;
     public int date;
     public int time;
 
-    public Output(String teacher, String student, String subject, int date, int time) {
+    public Lesson(String teacher, String student, String subject, int date, int time) {
         this.teacher = teacher;
         this.student = student;
         this.subject = subject;
@@ -15,7 +15,7 @@ public class Output {
         this.time = time;
     }
 
-    Output(Operator action) {
+    Lesson(Operator action) {
         // action.name から Output[]を作成
         // 例）#2: Sanji and Kim in 1 | 1 | subject math
         // インスタンスを初期化
