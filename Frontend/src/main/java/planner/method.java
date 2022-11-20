@@ -14,6 +14,7 @@ public class method {
 				} else {
 					d1 = (i + 1) / 3 + 1;
 				}
+				//d1 = (int)Math.ceil((i + 1) / 3.0);
 				int d2 = (i + 1) % 3;
 				if (d2 == 0) {
 					d2 = 3;

@@ -1,12 +1,46 @@
 <html>
-    <head>
-        <title>シフト表</title>
-    </head>
-    <body>
-        <th:block th:each="op : ${ops}">
-            [[$op.toString()]]<br>
-        </th:block>
-        <br>
-        [[${ops.toString()}]]
-    </body>
+
+<head>
+    <title>シフト表</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="time : ${#numbers.sequence(1,timetable[0].length)}">
+                <tr>
+                    <td>[[${time}]]</td>
+                    <th:block th:each="day : ${#numbers.sequence(1,timetable.length)}">
+                        <td th:text="${timetable[__${day}__][__${time}__].teacher}"></td>
+                    </th:block>
+                </tr>
+                <tr>
+                    <td></td>
+                    <th:block th:each="day : ${#numbers.sequence(1,timetable.length)}">
+                        <td th:text="${timetable[__${day}__][__${time}__].student}"></td>
+                    </th:block>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+
+    <th:block th:each="op : ${ops}">
+        [[$op.toString()]]<br>
+    </th:block>
+    <br>
+    [[${ops.toString()}]]
+</body>
+
 </html>

@@ -5,7 +5,8 @@ import static java.util.stream.Collectors.*;
 import java.util.*;
 
 public class Bind implements Cloneable {
-	private static Bind UNSATISFIED = new Bind(null);
+	static Bind UNSATISFIED = new Bind(null);
+	
 
 	Map<String, String> vars = new TreeMap<String, String>();
 

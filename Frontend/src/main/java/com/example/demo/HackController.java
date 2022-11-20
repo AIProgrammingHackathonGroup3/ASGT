@@ -68,7 +68,7 @@ public class HackController {
         timetable.add(day7time1);
         timetable.add(day7time2);
         timetable.add(day7time3);
-         System.out.print(timetable);
+        System.out.print(timetable);
 
         ArrayList<String> initString = new ArrayList<>();
 
@@ -132,9 +132,38 @@ public class HackController {
 
         Problem p = new Schedule(sampleInitialState, sampleGoalState);
         List<Operator> op = new ForwardPlanner().solve(p);
+        Lecture[][] timetable = operator2Timetable(sampleGoalState);
 
         model.addAttribute("ops", op);
+        model.addAttribute("timetable", timetable);
 
         return "/schedule.html";
+    }
+
+    /**
+     * 目的状態の述語リストからシフト表を作成
+     * @param goalState
+     * @return
+     */
+    private Lecture[][] operator2Timetable(List<Predicate> goalState) {
+        Lecture[][] timetable = new Lecture[7 + 1][3 + 1];
+
+        for (Predicate p : goalState) {
+            Bind b = new Bind();
+            b.unified(p, new Predicate("?x in ?z | ?v"));
+            if (b.isSatisfied()) {
+                int day = Integer.parseInt(b.instantiate(new Predicate("?z")).toString());
+                int time = Integer.parseInt(b.instantiate(new Predicate("?v")).toString());
+                String attendee = b.instantiate(new Predicate("?x")).toString();
+
+                if (timetable[day][time] == null) {
+                    timetable[day][time] = new Lecture(attendee, "");
+                } else {
+                    timetable[day][time].student = attendee;
+                }
+            }
+        }
+
+        return timetable;
     }
 }
