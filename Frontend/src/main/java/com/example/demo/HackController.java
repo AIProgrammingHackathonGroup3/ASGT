@@ -4,9 +4,10 @@ import java.util.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fasterxml.jackson.core.JsonGenerator;
+import planner.Lesson;
 
 @Controller
 public class HackController {
@@ -61,6 +62,20 @@ public class HackController {
 
     @RequestMapping(value = "/schedule")
     private String schedulePage(Model model) {
+        // List<Output> output = (new PlannerAdapter()).test();
+        ArrayList<Lesson> lessonList = new ArrayList<Lesson>();
+        lessonList
+                .add(new Lesson("Sanji", "Kim", "English", 1, 2));
+        lessonList
+                .add(new Lesson("Mitsuya", "Kim", "Math", 2, 2));
+
+        ScheduleService service = new ScheduleService(lessonList);
+
+        model.addAttribute("lessonInfo", service.getAllAsString());
+
+        // model.addAttribute("teacherNameList", service.getTeacherNameList());
+        // model.addAttribute("timeList", service.getTimeList());
+        // model.addAttribute("dateList", service.getDateList());
 
         return "/schedule.html";
     }
