@@ -5,6 +5,21 @@ import static planner.Matcher.*;
 
 import java.util.*;
 
+// class Output {
+// 	String teacher;
+// 	String student;
+// 	String subject;
+// 	int date;
+// 	int time;
+
+// 	Output(Operator action) {
+// 		// action.name から Output[]を作成
+// 		// 例）#2: Sanji and Kim in 1 | 1 | subject math
+// 		// インスタンスを初期化
+// 	}
+
+// }
+
 public class ForwardPlanner extends Planner {
 	public List<Operator> solve(Problem problem) {
 		this.operators = problem.operators();
@@ -25,8 +40,12 @@ public class ForwardPlanner extends Planner {
 		// 目標状態までの手順を表示
 		System.out.println("***** This is a plan! *****");
 		var plan = goal.toPlan();
-		for (var action : plan)
+
+		// List<Output> outputs = new ArrayList<Output>();
+		for (var action : plan) {
+			// outputs.add(new Output(action));
 			System.out.println(action.name);
+		}
 		return plan;
 	}
 

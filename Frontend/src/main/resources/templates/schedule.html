@@ -1,43 +1,33 @@
 <html>
-
-<head>
-    <title>繧ｷ繝輔ヨ陦ｨ</title>
-</head>
-
-<body>
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>7</th>
-            </tr>
-        </thead>
-        <tbody>
-            <th:block th:each="t,time : ${timetable[0]}">
+    <head>
+        <title>シフトの自動作成</title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>結果</h1>
+        <div th:each="info : ${lessonInfo}">
+            <span th:text="${info}"></span>
+        </div>
+        <table class="table">
+            <thead >
                 <tr>
-                    <td>[[${time.index}]]</td>
-                    <th:block th:each="d,day : ${timetable.length}">
-                      <td >[[${timetable[day.index][time.index].teacher}]]</td>
-                    </th:block>
+                    <th th:each="value : ${tableHead}" scope="col"> 
+                        <span th:text="${value}"></span>
+                    </th>
                 </tr>
-                <tr>
-                    <td></td>
-                    <th:block th:each="d,day : ${timetable.length}">
-                      <td >[[${timetable[day.index][time.index].student}]]</td>
-                    </th:block>
+            </thead>
+            <tbody>
+                <tr scope="row">
+                    <td th:each="value : ${tableRow1}"><span th:text="${value}"></span></td>
                 </tr>
-            </th:block>
-        </tbody>
-    </table>
-
-    <br>
-    [[${ops}]]
-</body>
-
+                <tr scope="row">
+                    <td th:each="value : ${tableRow2}"><span th:text="${value}"></span></td>
+                </tr>
+                <tr scope="row">
+                    <td th:each="value : ${tableRow3}"><span th:text="${value}"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
 </html>

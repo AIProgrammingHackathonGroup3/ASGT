@@ -1,15 +1,14 @@
 package com.example.demo;
 
 import java.util.*;
-
-import planner.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonGenerator;
+import planner.Lesson;
 
 @Controller
 public class HackController {
@@ -131,16 +130,41 @@ public class HackController {
 
     @RequestMapping(value = "/schedule")
     private String schedulePage(Model model) {
-    	sampleGoalState = method.getGoal(studentsName);
+        // Define data list
+        List<Lesson> lessonList = new ArrayList<Lesson>();
+        // {"1", "2", ... , "10"}
+        List<String> tableHead = IntStream.rangeClosed(1, 10)
+                .boxed().toList().stream().map(Object::toString)
+                .collect(Collectors.toList());
 
-        Problem p = new Schedule(sampleInitialState, sampleGoalState);
-        List<Operator> op = new ForwardPlanner().solve(p);
-        System.out.println(op);
-        Lecture[][] timetable = operator2Timetable(op);
-        System.out.println(timetable);
+        // Add Sample Lessons.
+        lessonList
+                .add(new Lesson("Sanji", "Kim", "English", 1, 2));
+        lessonList
+                .add(new Lesson("Mitsuya", "Kim", "Math", 2, 1));
 
-        model.addAttribute("ops", op);
-        model.addAttribute("timetable", timetable);
+        // Make schedule from lessons
+        ScheduleService service = new ScheduleService(lessonList);
+
+        tableHead.add(0, "Time/Date");
+
+        String[][] table = service.getTable();
+        // List<String> tableRow1 = new ArrayList<String>();
+        // List<String> tableRow2 = new ArrayList<String>();
+        // List<String> tableRow3 = new ArrayList<String>();
+        // tableRow1.addAll(Arrays.asList(table[1]));
+        // tableRow1.addAll(Arrays.asList(table[2]));
+        // tableRow1.addAll(Arrays.asList(table[3]));
+        System.out.println(table);
+        // System.out.println(tableRow1);
+        // System.out.println(tableRow2);
+        // System.out.println(tableRow3);
+        // Add model attribution
+        model.addAttribute("tableHead", tableHead);
+        model.addAttribute("lessonInfo", service.getAllAsString());
+        model.addAttribute("tableRow1", table[1]);
+        model.addAttribute("tableRow2", table[2]);
+        model.addAttribute("tableRow3", table[3]);
 
         return "/schedule.html";
     }
