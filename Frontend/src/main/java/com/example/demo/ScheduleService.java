@@ -35,7 +35,7 @@ public class ScheduleService {
 
         for (Lesson lesson : lessonList) {
             teacherNameSet.add(lesson.teacher);
-            table[lesson.time][lesson.date] = lesson.teacher + " with " + lesson.student;
+            table[lesson.time][lesson.date] = lesson.teacher + " with " + lesson.student + " | " + lesson.subject;
         }
         // Convert set to list
         teacherNameList = new ArrayList<>(teacherNameSet);
