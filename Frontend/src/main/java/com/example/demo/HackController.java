@@ -77,6 +77,8 @@ public class HackController {
         initString.add(method.getTakeSubject(name, subject));
 
         sampleInitialState.addAll(Utils.list(initString));
+        
+        studentsName.add(name);
 
         return "/submit.html";
     }
@@ -129,10 +131,13 @@ public class HackController {
 
     @RequestMapping(value = "/schedule")
     private String schedulePage(Model model) {
+    	sampleGoalState = method.getGoal(studentsName);
 
         Problem p = new Schedule(sampleInitialState, sampleGoalState);
         List<Operator> op = new ForwardPlanner().solve(p);
-        Lecture[][] timetable = operator2Timetable(sampleGoalState);
+        System.out.println(op);
+        Lecture[][] timetable = operator2Timetable(op);
+        System.out.println(timetable);
 
         model.addAttribute("ops", op);
         model.addAttribute("timetable", timetable);
@@ -145,21 +150,28 @@ public class HackController {
      * @param goalState
      * @return
      */
-    private Lecture[][] operator2Timetable(List<Predicate> goalState) {
+    private Lecture[][] operator2Timetable(List<Operator> operators) {
         Lecture[][] timetable = new Lecture[7 + 1][3 + 1];
+        for(int i=0;i<timetable.length;i++) {
+        	for(int j=0;j<timetable[0].length;j++) {
+        		timetable[i][j] = new Lecture();
+        	}
+        }
+        System.out.println(timetable);
 
-        for (Predicate p : goalState) {
+        if(operators != null && operators.size() != 0) {
+        for (Operator op : operators) {
             Bind b = new Bind();
-            b.unified(p, new Predicate("?x in ?z | ?v"));
+            b.unified(op.getName(), new Predicate("?n ?x and ?y in ?z | ?v | subject ?w"));
             if (b.isSatisfied()) {
+            	System.out.println(b);
                 int day = Integer.parseInt(b.instantiate(new Predicate("?z")).toString());
                 int time = Integer.parseInt(b.instantiate(new Predicate("?v")).toString());
-                String attendee = b.instantiate(new Predicate("?x")).toString();
-
-                if (timetable[day][time] == null) {
-                    timetable[day][time] = new Lecture(attendee, "");
-                } else {
-                    timetable[day][time].student = attendee;
+                String student = b.instantiate(new Predicate("?x")).toString();
+                String teacher = b.instantiate(new Predicate("?y")).toString();
+                
+                timetable[day][time] = new Lecture(student, teacher);
+                System.out.println(timetable);
                 }
             }
         }

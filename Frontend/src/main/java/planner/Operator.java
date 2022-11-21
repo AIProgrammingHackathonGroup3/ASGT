@@ -31,6 +31,10 @@ public class Operator {
 		this.addList = new ArrayList<>(addList);
 		this.delList = new ArrayList<>(delList);
 	}
+	
+	public Predicate getName() {
+		return name;
+	}
 
 	//現在の状態を文字列表示
 	public String toString() {

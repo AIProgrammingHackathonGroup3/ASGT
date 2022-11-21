@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>シフト表</title>
+    <title>繧ｷ繝輔ヨ陦ｨ</title>
 </head>
 
 <body>
@@ -19,28 +19,25 @@
             </tr>
         </thead>
         <tbody>
-            <th:block th:each="time : ${#numbers.sequence(1,timetable[0].length)}">
+            <th:block th:each="t,time : ${timetable[0]}">
                 <tr>
-                    <td>[[${time}]]</td>
-                    <th:block th:each="day : ${#numbers.sequence(1,timetable.length)}">
-                        <td th:text="${timetable[__${day}__][__${time}__].teacher}"></td>
+                    <td>[[${time.index}]]</td>
+                    <th:block th:each="d,day : ${timetable.length}">
+                      <td >[[${timetable[day.index][time.index].teacher}]]</td>
                     </th:block>
                 </tr>
                 <tr>
                     <td></td>
-                    <th:block th:each="day : ${#numbers.sequence(1,timetable.length)}">
-                        <td th:text="${timetable[__${day}__][__${time}__].student}"></td>
+                    <th:block th:each="d,day : ${timetable.length}">
+                      <td >[[${timetable[day.index][time.index].student}]]</td>
                     </th:block>
                 </tr>
             </th:block>
         </tbody>
     </table>
 
-    <th:block th:each="op : ${ops}">
-        [[$op.toString()]]<br>
-    </th:block>
     <br>
-    [[${ops.toString()}]]
+    [[${ops}]]
 </body>
 
 </html>
