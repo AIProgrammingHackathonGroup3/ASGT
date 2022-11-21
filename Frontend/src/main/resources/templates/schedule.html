@@ -9,27 +9,25 @@
         <div th:each="info : ${lessonInfo}">
             <span th:text="${info}"></span>
         </div>
-        <!-- <table class="table">
-            <div th:each="date : ${dateList}">
-                <thead >
-                    <tr>
-                        <th>
-                            <span th:text="${date}"></span>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th th:each="name : ${teacherNameList}" scope="col"> 
-                            <span th:text="${name}"></span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody th:each="time : ${timeList}">
-                    
-                    <tr th:each="lesson : ${lessonList}">
-                        <td><span th:text="${lesson.student}">  </span></td>
-                    </tr>
-                </tbody>
-            </div>
-        </table> -->
+        <table class="table">
+            <thead >
+                <tr>
+                    <th th:each="value : ${tableHead}" scope="col"> 
+                        <span th:text="${value}"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row">
+                    <td th:each="value : ${tableRow1}"><span th:text="${value}"></span></td>
+                </tr>
+                <tr scope="row">
+                    <td th:each="value : ${tableRow2}"><span th:text="${value}"></span></td>
+                </tr>
+                <tr scope="row">
+                    <td th:each="value : ${tableRow3}"><span th:text="${value}"></span></td>
+                </tr>
+            </tbody>
+        </table>
     </body>
 </html>

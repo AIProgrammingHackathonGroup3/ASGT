@@ -27,6 +27,10 @@ public class Lesson {
         this.time = Integer.parseInt(Output[7]);
     }
 
+    boolean isSameTimeTable(int date, int time) {
+        return (this.date == date && this.time == time);
+    }
+
     public String toString() {
         return "teacher:" + this.teacher + "\n" +
                 "student:" + this.student + "\n" +

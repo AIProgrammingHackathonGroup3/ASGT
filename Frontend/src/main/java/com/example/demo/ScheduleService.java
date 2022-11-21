@@ -12,30 +12,53 @@ import planner.Lesson;
  * 必要な情報を引き出すことができるようにするクラス
  */
 public class ScheduleService {
-    List<Lesson> lessenList;
-    Set<String> teacherNameSet = new HashSet<String>();
-    Set<String> timeSet = new HashSet<String>();
-    Set<String> dateSet = new HashSet<String>();
+    private List<Lesson> lessonList;
+    private List<String> dateList;
+    private List<String> timeList;
+    private List<String> teacherNameList;
+    private String[][] table = new String[4][11]; // 0行目と0列目は未使用10日と3限のTimeTable
 
-    ScheduleService(List<Lesson> lessenList) {
-        this.lessenList = lessenList;
-        for (Lesson lesson : lessenList) {
-            teacherNameSet.add(lesson.teacher);
-            timeSet.add(String.valueOf(lesson.time));
-            dateSet.add(String.valueOf(lesson.date));
+    ScheduleService(List<Lesson> lessonList) {
+        Set<String> teacherNameSet = new HashSet<String>();
+
+        this.lessonList = lessonList;
+
+        // Initiate table
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table[i].length; j++) {
+                if (j == 0)
+                    table[i][j] = Integer.toString(i);
+                else
+                    table[i][j] = " ";
+            }
         }
+
+        for (Lesson lesson : lessonList) {
+            teacherNameSet.add(lesson.teacher);
+            table[lesson.time][lesson.date] = lesson.teacher + " with " + lesson.student;
+        }
+        // Convert set to list
+        teacherNameList = new ArrayList<>(teacherNameSet);
+        // Sort list
+        // Collections.sort(timeList);
+        // Collections.sort(dateList);
+        // Make table
     }
 
     List<String> getTeacherNameList() {
-        return new ArrayList<String>(teacherNameSet);
+        return teacherNameList;
     }
 
     List<String> getTimeList() {
-        return new ArrayList<String>(timeSet);
+        return timeList;
     }
 
     List<String> getDateList() {
-        return new ArrayList<String>(dateSet);
+        return dateList;
+    }
+
+    String[][] getTable() {
+        return table;
     }
 
     /**
@@ -46,7 +69,7 @@ public class ScheduleService {
      */
     List<String> getAllAsString() {
         List<String> lessonToStringList = new ArrayList<String>();
-        for (Lesson lesson : this.lessenList) {
+        for (Lesson lesson : this.lessonList) {
             lessonToStringList.add(lesson.toString());
         }
 
