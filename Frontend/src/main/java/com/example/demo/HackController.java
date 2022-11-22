@@ -77,6 +77,7 @@ public class HackController {
         initString.addAll(method.getStudentDay(name, timetable));
         initString.add(method.getAttend(name, attend));
         initString.add(method.getTakeSubject(name, subject));
+        initString.add(method.likeTeacher(name, likeTeacher));
 
         sampleInitialState.addAll(Utils.list(initString));
 

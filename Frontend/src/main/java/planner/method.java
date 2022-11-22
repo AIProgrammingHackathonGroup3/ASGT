@@ -57,6 +57,10 @@ public class method {
         return goal;
     }
 
+	public static String likeTeacher(String name, String teacher){
+		return name + " like " + teacher;
+	}
+
 	public static String getTakeSubject(String name, String subject) {
 		return name + " take " + subject;
 	}
